@@ -1,1 +1,61 @@
-index.html
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CompraMoz | Marketplace</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#10294d}
+header{background:#10294d;color:white;text-align:center;padding:20px}
+header span{color:#ff6500}
+.hero{text-align:center;background:white;padding:35px 15px}
+h2{color:#10294d}
+.btn{background:#ff6500;color:white;padding:12px 18px;border:0;border-radius:8px;text-decoration:none;display:inline-block}
+main{max-width:900px;margin:auto;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{background:white;border:1px solid #e1e6ee;border-radius:12px;padding:15px;text-align:center}
+.emoji{font-size:42px}
+.price{font-weight:bold;color:#ff6500}
+.seller{background:#ffede2;padding:20px;border-radius:12px;margin-top:25px}
+footer{background:#10294d;color:white;text-align:center;padding:20px;margin-top:25px}
+@media(min-width:600px){.grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header>
+<h1>🛍️ Compra<span>Moz</span></h1>
+<p>Tudo o que precisas, num só lugar!</p>
+</header>
+<section class="hero">
+<h2>Compra e vende<br><span style="color:#ff6500">com confiança!</span></h2>
+<p>Descobre produtos de vários vendedores em Maputo.</p>
+<a class="btn" href="#produtos">Explorar produtos</a>
+</section>
+<main>
+<h2>Categorias</h2>
+<div class="grid">
+<div class="card"><div class="emoji">👕</div>Moda</div>
+<div class="card"><div class="emoji">📱</div>Telemóveis</div>
+<div class="card"><div class="emoji">💻</div>Informática</div>
+<div class="card"><div class="emoji">🏠</div>Casa</div>
+</div>
+<h2 id="produtos">Produtos em destaque</h2>
+<div class="grid">
+<div class="card"><div class="emoji">📱</div><h3>Telemóvel Android</h3><p class="price">32.500 MT</p></div>
+<div class="card"><div class="emoji">👟</div><h3>Ténis desportivos</h3><p class="price">4.200 MT</p></div>
+<div class="card"><div class="emoji">🎒</div><h3>Mochila</h3><p class="price">1.800 MT</p></div>
+<div class="card"><div class="emoji">🎧</div><h3>Auscultadores</h3><p class="price">1.200 MT</p></div>
+</div>
+<div class="seller">
+<h2>Queres vender na CompraMoz?</h2>
+<p>Estamos a preparar a nossa rede de vendedores em Maputo.</p>
+<p>Em breve poderás registar a tua loja e publicar os teus produtos.</p>
+<a class="btn" href="mailto:compramoz.contacto@gmail.com?subject=Quero%20vender%20na%20CompraMoz">Tenho interesse</a>
+</div>
+</main>
+<footer>
+<strong>CompraMoz 🇲🇿</strong>
+<p>Protótipo inicial — preços e produtos ilustrativos.</p>
+</footer>
+</body>
+</html>
