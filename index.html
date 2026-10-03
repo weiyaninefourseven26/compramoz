@@ -42,6 +42,7 @@ required></textarea>
   </form>
 </div>
 
+
 <script>
 function enviarPedido(event) {
   event.preventDefault();
@@ -49,12 +50,18 @@ function enviarPedido(event) {
   const nome = document.getElementById("nome").value.trim();
   const telefone = document.getElementById("telefone").value.trim();
   const tipo = document.getElementById("tipo").value;
+  const produto = document.getElementById("produto").value.trim();
+  const preco = document.getElementById("preco").value;
+  const descricao = document.getElementById("descricao").value.trim();
 
   const mensagem =
     "Olá, CompraMoz! Tenho interesse em vender na plataforma.\n\n" +
     "Nome/Loja: " + nome + "\n" +
     "Telefone: " + telefone + "\n" +
-    "Categoria: " + tipo;
+    "Categoria: " + tipo + "\n" +
+    "Produto: " + produto + "\n" +
+    "Preço: " + preco + " MT\n" +
+    "Descrição: " + descricao;
 
   const url = "https://wa.me/258844064166?text=" +
     encodeURIComponent(mensagem);
@@ -62,3 +69,4 @@ function enviarPedido(event) {
   window.open(url, "_blank");
 }
 </script>
+
