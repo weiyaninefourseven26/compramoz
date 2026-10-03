@@ -1,24 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CompraMoz | Marketplace</title>
+<meta name="theme-color" content="#10294d">
+<title>CompraMoz | Compra e vende em Moçambique</title>
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#10294d}
-header{background:#10294d;color:white;text-align:center;padding:20px}
-header span{color:#ff6500}
-.hero{text-align:center;background:white;padding:35px 15px}
-h2{color:#10294d}
-.btn{background:#ff6500;color:white;padding:12px 18px;border:0;border-radius:8px;text-decoration:none;display:inline-block}
-main{max-width:900px;margin:auto;padding:20px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.card{background:white;border:1px solid #e1e6ee;border-radius:12px;padding:15px;text-align:center}
+:root{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6fa;color:#10294d}
+header{background:#10294d;color:white;text-align:center;padding:22px 12px}
+header h1{font-size:34px;margin:5px}
+header span,.accent{color:#ff6500}
+header p{margin:8px 0}
+.hero{text-align:center;background:white;padding:30px 16px}
+.hero h2{font-size:28px}
+.btn{background:#ff6500;color:white;border:0;border-radius:8px;padding:12px 16px;cursor:pointer;font-size:15px}
+main{max-width:950px;margin:auto;padding:18px 14px}
+.search{width:100%;padding:14px;border:1px solid #cbd3df;border-radius:10px;font-size:16px;margin:8px 0 18px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.filters button{background:white;color:#10294d;border:1px solid #cbd3df;border-radius:20px;padding:10px 13px;cursor:pointer}
+.filters button.active,.filters button:hover{background:#10294d;color:white}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:white;border:1px solid #e0e5ed;border-radius:12px;padding:14px 8px;text-align:center;min-width:0}
 .emoji{font-size:42px}
-.price{font-weight:bold;color:#ff6500}
-.seller{background:#ffede2;padding:20px;border-radius:12px;margin-top:25px}
+.card h3{font-size:16px;overflow-wrap:anywhere}
+.price{font-weight:bold;color:#e65300}
+.seller{background:#e7edf8;padding:20px;border-radius:12px;margin-top:28px}
 footer{background:#10294d;color:white;text-align:center;padding:20px;margin-top:25px}
-@media(min-width:600px){.grid{grid-template-columns:repeat(4,1fr)}}
+#result{color:#52627a;font-size:14px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -26,36 +38,84 @@ footer{background:#10294d;color:white;text-align:center;padding:20px;margin-top:
 <h1>🛍️ Compra<span>Moz</span></h1>
 <p>Tudo o que precisas, num só lugar!</p>
 </header>
+
 <section class="hero">
-<h2>Compra e vende<br><span style="color:#ff6500">com confiança!</span></h2>
+<h2>Compra e vende<br><span class="accent">com confiança!</span></h2>
 <p>Descobre produtos de vários vendedores em Maputo.</p>
-<a class="btn" href="#produtos">Explorar produtos</a>
+<button class="btn" onclick="document.getElementById('pesquisa').focus();document.getElementById('produtos').scrollIntoView({behavior:'smooth'})">Explorar produtos</button>
 </section>
+
 <main>
-<h2>Categorias</h2>
-<div class="grid">
-<div class="card"><div class="emoji">👕</div>Moda</div>
-<div class="card"><div class="emoji">📱</div>Telemóveis</div>
-<div class="card"><div class="emoji">💻</div>Informática</div>
-<div class="card"><div class="emoji">🏠</div>Casa</div>
+<h2>Encontra o que procuras</h2>
+<input id="pesquisa" class="search" type="search" placeholder="🔎 Pesquisar produtos..." oninput="filtrar()">
+
+<div class="filters" id="filtros">
+<button class="active" data-cat="Todos" onclick="categoria('Todos',this)">Todos</button>
+<button data-cat="Moda" onclick="categoria('Moda',this)">👕 Moda</button>
+<button data-cat="Telemóveis" onclick="categoria('Telemóveis',this)">📱 Telemóveis</button>
+<button data-cat="Informática" onclick="categoria('Informática',this)">💻 Informática</button>
+<button data-cat="Casa" onclick="categoria('Casa',this)">🏠 Casa</button>
 </div>
+
 <h2 id="produtos">Produtos em destaque</h2>
-<div class="grid">
-<div class="card"><div class="emoji">📱</div><h3>Telemóvel Android</h3><p class="price">32.500 MT</p></div>
-<div class="card"><div class="emoji">👟</div><h3>Ténis desportivos</h3><p class="price">4.200 MT</p></div>
-<div class="card"><div class="emoji">🎒</div><h3>Mochila</h3><p class="price">1.800 MT</p></div>
-<div class="card"><div class="emoji">🎧</div><h3>Auscultadores</h3><p class="price">1.200 MT</p></div>
+<p id="result">4 produtos de exemplo</p>
+
+<div class="grid" id="catalogo">
+<div class="card" data-cat="Telemóveis" data-name="Telemóvel Android">
+<div class="emoji">📱</div><h3>Telemóvel Android</h3>
+<p class="price">32.500 MT</p><small>Categoria: Telemóveis</small>
 </div>
+<div class="card" data-cat="Moda" data-name="Ténis desportivos">
+<div class="emoji">👟</div><h3>Ténis desportivos</h3>
+<p class="price">4.200 MT</p><small>Categoria: Moda</small>
+</div>
+<div class="card" data-cat="Casa" data-name="Mochila">
+<div class="emoji">🎒</div><h3>Mochila</h3>
+<p class="price">1.800 MT</p><small>Categoria: Casa</small>
+</div>
+<div class="card" data-cat="Informática" data-name="Auscultadores">
+<div class="emoji">🎧</div><h3>Auscultadores</h3>
+<p class="price">1.200 MT</p><small>Categoria: Informática</small>
+</div>
+</div>
+
+<p id="vazio" hidden>Não encontrámos produtos. Experimenta outra pesquisa ou categoria.</p>
+
 <div class="seller">
 <h2>Queres vender na CompraMoz?</h2>
 <p>Estamos a preparar a nossa rede de vendedores em Maputo.</p>
-<p>Em breve poderás registar a tua loja e publicar os teus produtos.</p>
-<a class="btn" href="mailto:compramoz.contacto@gmail.com?subject=Quero%20vender%20na%20CompraMoz">Tenho interesse</a>
+<p>Em breve poderás apresentar a tua loja e os teus produtos.</p>
+<button class="btn" onclick="alert('Obrigado pelo interesse! O registo de vendedores ainda está em preparação.')">Tenho interesse</button>
 </div>
 </main>
+
 <footer>
 <strong>CompraMoz 🇲🇿</strong>
-<p>Protótipo inicial — preços e produtos ilustrativos.</p>
+<p>Protótipo inicial — produtos e preços ilustrativos.</p>
 </footer>
+
+<script>
+let catAtual="Todos";
+function categoria(cat,botao){
+catAtual=cat;
+document.querySelectorAll("#filtros button").forEach(b=>b.classList.remove("active"));
+botao.classList.add("active");
+filtrar();
+}
+function filtrar(){
+const termo=document.getElementById("pesquisa").value.toLowerCase().trim();
+const cards=document.querySelectorAll("#catalogo .card");
+let total=0;
+cards.forEach(card=>{
+const correspondeCat=catAtual==="Todos"||card.dataset.cat===catAtual;
+const correspondeTexto=card.dataset.name.toLowerCase().includes(termo)||card.dataset.cat.toLowerCase().includes(termo);
+const mostrar=correspondeCat&&correspondeTexto;
+card.hidden=!mostrar;
+if(mostrar)total++;
+});
+document.getElementById("result").textContent=total+" produto(s) encontrado(s)";
+document.getElementById("vazio").hidden=total!==0;
+}
+</script>
 </body>
 </html>
